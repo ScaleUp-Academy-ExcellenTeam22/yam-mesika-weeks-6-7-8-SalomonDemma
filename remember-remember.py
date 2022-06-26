@@ -1,20 +1,23 @@
 from PIL import Image
 
 
-def decrypt_image(path: str):
+def decrypt_image(path: str) -> str:
     """
-    This function decrypted message from the image (if exit one)
-    :param path: Get a path of a image encrypted.
+    This function decrypts message from the image (if one exists)
+    :param path: Get a path of an image encrypted.
     """
-    # importing PIL
-    img = Image.open(path)
-    pixels = img.load()
-    width, height = img.size
+
+    input_image = Image.open(path)
+    pixels = input_image.load()
+    width, height = input_image.size
+
+    massage_decrypted = ''
     for col in range(width):
         for row in range(height):
             if pixels[col, row] == 1:
-                print(chr(row), end='')
+                massage_decrypted.join(chr(row))
 
+    return massage_decrypted
 
 if __name__ == "__main__":
-    decrypt_image(input("enter photo path: "))
+    print(decrypt_image(input("enter photo path: ")))
