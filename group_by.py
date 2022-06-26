@@ -1,16 +1,20 @@
 
-def group_by(func: callable, data_base: iter) -> dict:
+from collections.abc import Iterable
+from typing import Optional
+
+
+def group_by(func: Optional[callable], iterable: Iterable) -> dict:
     """
-    This function create a dictionary of groups. the key is by the function received and the item is
+    This function creates a dictionary of groups. The key is by the function received and the item is
     a list of the values that have the same value return by the function.
-    :param func: a function that that will group value
-    :param data_base: an iterable data base that the function will read value from
-    :return: dictionary of grouped value
+    :param func: A function that that will group value
+    :param iterable: An iterable that the function will read value from
+    :return: Dictionary of grouped value
     """
-    dic = dict()
-    for fun_key in data_base:
-        dic.setdefault(func(fun_key), list()).append(fun_key)
-    return dic
+    dictionary_group = dict()
+    for fun_key in iterable:
+        dictionary_group.setdefault(func(fun_key), list()).append(fun_key)
+    return dictionary_group
 
 
 if __name__ == "__main__":
